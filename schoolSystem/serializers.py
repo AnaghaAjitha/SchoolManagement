@@ -5,12 +5,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
         fields = ['id','username','first_name','last_name','email','role']
-        def create(self,validated_data):
-            password=validated_data.pop('password')
-            user=User.objects.create(**validated_data)
-            user.set_password(password)
-            user.save()
-            return user
 
         def validate_username(self,value):
             if User.objects.filter(username=value).exists():
