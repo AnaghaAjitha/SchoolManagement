@@ -9,11 +9,6 @@ from .serializers import UserSerializer,SubjectSerializer,MarkSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset=User.objects.all()
     serializer_class=UserSerializer
-    def create(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        if User.objects.filter(username=username).exists():
-            raise ValidationError("Username already exists.")
-        return super().create(request, *args, **kwargs)
 
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset=Subject.objects.all()
